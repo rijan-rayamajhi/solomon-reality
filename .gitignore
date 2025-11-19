@@ -17,6 +17,13 @@ out/
 .env.test.local
 .env.production.local
 
+# Database
+*.sqlite
+*.db
+
+# WhatsApp Session
+backend/whatsapp-session/
+
 # Logs
 *.log
 npm-debug.log*
