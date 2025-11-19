@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Consistent Container Width */
+  .container-responsive {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-responsive {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-responsive {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  body {
+    @apply bg-background text-text-primary font-body antialiased;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-text-primary;
+    letter-spacing: -0.01em;
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Card Components - Apple-inspired */
+  .card-luxury {
+    @apply bg-surface border border-border rounded-lg p-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-medium transition-all duration-200 ease-in-out;
+    transition-timing-function: cubic-bezier(0.22, 0.9, 0.38, 1);
+    backdrop-filter: blur(10px);
+  }
+
+  .card-elevated {
+    @apply bg-surface border border-border rounded-lg p-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-large transition-all duration-200 ease-in-out hover:-translate-y-1;
+    transition-timing-function: cubic-bezier(0.22, 0.9, 0.38, 1);
+  }
+
+  .card-glass {
+    @apply bg-white/80 border border-border/50 rounded-lg p-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)];
+    backdrop-filter: blur(20px);
+  }
+
+  /* Input Components - Apple-inspired */
+  .input-elegant {
+    @apply bg-surface-muted border border-border rounded-apple px-4 py-3.5 text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent-primary/20 focus:border-accent-primary transition-all duration-200;
+    transition-timing-function: cubic-bezier(0.22, 0.9, 0.38, 1);
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .input-elegant:focus {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(91, 95, 151, 0.1);
+  }
+
+  .input-floating {
+    @apply relative;
+  }
+
+  .input-floating input:focus + label,
+  .input-floating input:not(:placeholder-shown) + label {
+    @apply -translate-y-6 scale-90 text-accent-primary;
+  }
+
+  /* Button Components - Apple-inspired */
+  .btn-primary {
+    @apply bg-gradient-primary text-white font-semibold px-8 py-3.5 rounded-pill hover:shadow-glow-accent transition-all duration-300 transform hover:scale-[1.03] active:scale-[0.97];
+    transition-timing-function: cubic-bezier(0.22, 0.9, 0.38, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-primary:hover::before {
+    left: 100%;
+  }
+
+  .btn-secondary {
+    @apply bg-surface border border-border text-text-primary font-semibold px-8 py-3.5 rounded-pill hover:bg-surface-muted hover:border-accent-primary hover:shadow-medium transition-all duration-300;
+    transition-timing-function: cubic-bezier(0.22, 0.9, 0.38, 1);
+  }
+
+  .btn-outline {
+    @apply border-2 border-accent-primary text-accent-primary font-semibold px-8 py-3.5 rounded-pill hover:bg-accent-primary hover:text-white hover:shadow-medium transition-all duration-300;
+    transition-timing-function: cubic-bezier(0.22, 0.9, 0.38, 1);
+  }
+
+  .btn-ghost {
+    @apply text-text-secondary font-medium px-4 py-2 rounded-lg hover:bg-surface-muted hover:text-text-primary transition-all duration-200;
+    transition-timing-function: cubic-bezier(0.22, 0.9, 0.38, 1);
+  }
+
+  /* Text Utilities */
+  .text-luxury {
+    @apply text-accent-primary;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
+  }
+
+  /* Shadow Utilities */
+  .shadow-glow-gold {
+    box-shadow: 0 0 20px rgba(91, 95, 151, 0.15);
+  }
+
+  .shadow-glow-accent {
+    box-shadow: 0 0 20px rgba(91, 95, 151, 0.15);
+  }
+
+  /* Animation Utilities */
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  /* Skeleton Loader */
+  .skeleton {
+    @apply bg-surface-muted rounded-lg;
+    background: linear-gradient(
+      90deg,
+      #F2F4F7 0%,
+      #FFFFFF 50%,
+      #F2F4F7 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Scrollbar Styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-surface-muted rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full hover:bg-text-secondary;
+  }
+
+  /* Glass Morphism */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-border/50;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
+  }
+
+  /* Browse Properties Container */
+  .browse-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    .browse-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  /* Filters Sidebar */
+  .filters-sidebar {
+    flex: 0 0 22%;
+    max-width: 320px;
+    min-width: 280px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    height: auto;
+    overflow: visible;
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 1024px) {
+    .filters-sidebar {
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .filters-sidebar {
+      padding: 1.5rem;
+    }
+  }
+
+  /* Property Grid */
+  .property-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  @media (max-width: 1024px) {
+    .property-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .property-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  /* Property Card */
+  .property-card {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .property-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@layer utilities {
+  /* Keyframes for animations */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+}
+
